@@ -14,6 +14,7 @@ def draw_calculator_frame(stdscr, current_input, result):
             stdscr.refresh()
             return
         
+        
         # Рассчитываем позицию для центрирования
         calc_width = 60
         start_x = max(0, (width - calc_width) // 2)
