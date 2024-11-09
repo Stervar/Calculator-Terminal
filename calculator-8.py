@@ -54,7 +54,7 @@ class UltraAdvancedSafeCalculator:
         
         # Специальные функции
         'factorial': math.factorial,
-        🇷🇺 🇬🇧 
+
         # Комплексные числа
         'complex': complex,
         'real': lambda x: complex(x).real,
