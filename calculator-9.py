@@ -5,6 +5,8 @@ import ast
 import operator
 import cmath  # Для комплексных чисел
 
+
+
 class UltraAdvancedSafeCalculator:
     SAFE_FUNCTIONS = {
         # Основные математические функции
