@@ -80,10 +80,10 @@ This is not just a calculator - it's a full-fledged mathematical tool that trans
 
 ### 🌟 Поддержка проекта / Project Support 🌟
 
-<p align="center">
-  <strong>Если вам понравился проект, поставьте ⭐ звезду на GitHub!</strong><br>
-  <strong>If you liked the project, please give a ⭐ star on GitHub!</strong>
-</p>
+
+  >Если вам понравился проект, поставьте ⭐ звезду на GitHub!
+  If you liked the project, please give a ⭐ star on GitHub!
+
 
 ## 🛠 Установка / Installation
 
