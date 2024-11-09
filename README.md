@@ -92,3 +92,98 @@ cd terminal-calculator
 pip install -r requirements.txt
 python calculator.py
 
+
+
+
+<h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
+
+<h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
+
+# 🚀 Revolutionary Terminal Calculator 🧮
+
+<h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
+
+<p align="center">
+  <img src="https://github.com/Stervar/Stervar/blob/main/assets/f53336607ee8c6478f25d2665d7d5c3b.gif" alt="Header">
+</p>
+
+<h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
+
+## 🏆 Project Uniqueness
+
+This is not just a calculator - it's a full-fledged mathematical tool that transforms the terminal into a powerful computational laboratory! 🏆
+
+## 🔥 Killer Features
+
+- 🧮 Implicit Multiplication
+- 🚀 Function Autocompletion
+- ⚡ Instant Result
+- 🌐 Support for Complex Expressions
+
+## 📊 Key Advantages
+
+### 🔒 Absolute Security
+- Advanced protection against mathematical injections
+- Full computation control
+- Impossibility of executing malicious code
+
+### 🧠 Intelligent Computation Engine
+- Support for over 50 mathematical functions
+- Complex number handling
+- Automatic computation type detection
+
+### 🌐 Universality
+- Support for scientific, engineering, and everyday calculations
+- Handling large and small numbers
+- Precision up to 15 decimal places
+
+### 💡 Extended Functionality
+- Trigonometric calculations
+- Logarithmic transformations
+- Statistical analysis
+- Degree and root operations
+
+### 🎨 Intuitive Interface
+- Centered display
+- Color indication
+- Contextual hints
+- Convenient management
+
+### 🔍 Advanced Error Handling
+- Intelligent result formatting
+- Clear error messages
+- Automatic expression correction
+
+### 🚀 Performance
+- Lightning-fast calculations
+- Minimal resource consumption
+- Cross-platform compatibility
+
+### 📈 Mathematical Capabilities
+- Scientific notation support
+- Calculations with constants (π, e)
+- Infinity handling
+- Complex mathematical transformations
+
+### 🔧 Flexible Configuration
+- Extensible architecture
+- Ability to add custom functions
+- User adaptation
+
+### 💻 Technical Specifications
+- Written in Python
+- Uses curses for interface
+- Safe AST parsing
+- Minimal system requirements
+
+### 🌟 Project Support
+
+- If you liked the project, please give a ⭐ star on GitHub!
+
+## 🛠 Installation
+
+```bash
+git clone https://github.com/your_login/terminal-calculator.git
+cd terminal-calculator
+pip install -r requirements.txt
+python calculator.py
