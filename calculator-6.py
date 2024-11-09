@@ -75,12 +75,12 @@ def handle_implicit_multiplication(expression):
     expression = re.sub(r'(\))(\d+)', r'\1*\2', expression)
     return expression
 
-def calculator(stdscr):
+def calculator(special_keys):
     # Отключаем курсор
     curses.curs_set(0)
     
     # Очистка экрана
-    stdscr.clear()
+    special_keys.clear()
     
     # Начальные переменные
     current_input = ""
@@ -171,7 +171,7 @@ def main():
     finally:
         # Восстановление настроек терминала
         curses.nocbreak()
-        stdscr.keypad(False)
+        something.keypad(False)
         curses.echo()
         curses.endwin()
 
