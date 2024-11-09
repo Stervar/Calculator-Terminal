@@ -86,15 +86,15 @@ def draw_calculator_frame(framework, current_input, result):
 
         # Отрисовка рамки
         for idx, line in enumerate(frame):
-            stdscr.addstr(start_y + idx, start_x, line)
+            framework.addstr(start_y + idx, start_x, line)
 
 
         # Отображение ввода
-        stdscr.addstr(start_y + 3, start_x + 7, current_input)
+        framework.addstr(start_y + 3, start_x + 7, current_input)
         
         # Отображение результата
         if result:
-            stdscr.addstr(start_y + 3, start_x + 35, f"Результат: {result}")
+            framework.addstr(start_y + 3, start_x + 35, f"Результат: {result}")
 
         stdscr.refresh()
     
