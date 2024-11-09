@@ -12,91 +12,88 @@
 
 ## 🏆 Уникальность Проекта / Project Uniqueness
 
-Это не просто калькулятор - это полноценный математический инструмент, который превращает терминал в мощную вычислительную лабораторию! 🏆
+<p align="center" style="color: blue;">
+🇷🇺 <strong>Это не просто калькулятор - это полноценный математический инструмент, который превращает терминал в мощную вычислительную лабораторию! 🏆</strong>
+</p>
 
-This is not just a calculator - it's a full-fledged mathematical tool that transforms the terminal into a powerful computational laboratory! 🏆
+<p align="center" style="color: red;">
+🇬🇧 <em>This is not just a calculator - it's a full-fledged mathematical tool that transforms the terminal into a powerful computational laboratory! 🚀</em>
+</p>
 
 ## 🔥 Killer-фичи / Killer Features
 
-- 🧮 Неявное умножение / Implicit Multiplication
-- 🚀 Автодополнение функций / Function Autocompletion
-- ⚡ Мгновенный результат / Instant Result
-- 🌐 Поддержка любой сложности выражений / Support for Complex Expressions
+<p align="center" style="color: blue;">
+🇷🇺 <strong>
+- 🧮 Неявное умножение
+- 🚀 Автодополнение функций
+- ⚡ Мгновенный результат
+- 🌐 Поддержка любой сложности выражений
+</strong>
+</p>
+
+<p align="center" style="color: red;">
+🇬🇧 <em>
+- 🧮 Implicit Multiplication
+- 🚀 Function Autocompletion
+- ⚡ Instant Result
+- 🌐 Support for Complex Expressions
+</em>
+</p>
 
 ## 📊 Ключевые Преимущества / Key Advantages
 
 ### 🔒 Абсолютная Безопасность / Absolute Security
-- Передовая система защиты от математических инъекций / Advanced protection against mathematical injections
-- Полный контроль над вычислениями / Full computation control
-- Невозможность выполнения вредоносного кода / Impossibility of executing malicious code
+
+<p align="center" style="color: blue;">
+🇷🇺 <strong>
+- Передовая система защиты от математических инъекций
+- Полный контроль над вычислениями
+- Невозможность выполнения вредоносного кода
+</strong>
+</p>
+
+<p align="center" style="color: red;">
+🇬🇧 <em>
+- Advanced protection against mathematical injections
+- Full computation control
+- Impossibility of executing malicious code
+</em>
+</p>
 
 ### 🧠 Интеллектуальный Движок Вычислений / Intelligent Computation Engine
-- Поддержка более 50 математических функций / Support for over 50 mathematical functions
-- Работа с комплексными числами / Complex number handling
-- Автоматическое определение типа вычислений / Automatic computation type detection
 
-### 🌐 Универсальность / Universality
-- Поддержка научных, инженерных и бытовых вычислений / Support for scientific, engineering, and everyday calculations
-- Работа с большими и малыми числами / Handling large and small numbers
-- Точность до 15 знаков после запятой / Precision up to 15 decimal places
+<p align="center" style="color: blue;">
+🇷🇺 <strong>
+- Поддержка более 50 математических функций
+- Работа с комплексными числами
+- Автоматическое определение типа вычислений
+</strong>
+</p>
 
-### 💡 Расширенный Функционал / Extended Functionality
-- Тригонометрические вычисления / Trigonometric calculations
-- Логарифмические преобразования / Logarithmic transformations
-- Статистический анализ / Statistical analysis
-- Работа со степенями и корнями / Degree and root operations
+<p align="center" style="color: red;">
+🇬🇧 <em>
+- Support for over 50 mathematical functions
+- Complex number handling
+- Automatic computation type detection
+</em>
+</p>
 
-### 🎨 Интуитивный Интерфейс / Intuitive Interface
-- Центрированное отображение / Centered display
-- Цветовая индикация / Color indication
-- Контекстные подсказки / Contextual hints
-- Удобное управление / Convenient management
-
-### 🔍 Продвинутая Обработка Ошибок / Advanced Error Handling
-- Интеллектуальное форматирование результатов / Intelligent result formatting
-- Понятные сообщения об ошибках / Clear error messages
-- Автоматическая коррекция выражений / Automatic expression correction
-
-### 🚀 Производительность / Performance
-- Молниеносные вычисления / Lightning-fast calculations
-- Минимальное потребление ресурсов / Minimal resource consumption
-- Кроссплатформенность / Cross-platform compatibility
-
-### 📈 Математические Возможности / Mathematical Capabilities
-- Поддержка научной нотации / Scientific notation support
-- Вычисления с константами (π, e) / Calculations with constants (π, e)
-- Работа с бесконечностью / Infinity handling
-- Комплексные математические преобразования / Complex mathematical transformations
-
-### 🔧 Гибкая Настройка / Flexible Configuration
-- Расширяемая архитектура / Extensible architecture
-- Возможность добавления собственных функций / Ability to add custom functions
-- Адаптация под пользователя / User adaptation
-
-### 💻 Технические Характеристики / Technical Specifications
-- Написан на Python / Written in Python
-- Использует curses для интерфейса / Uses curses for interface
-- Безопасный AST-парсинг / Safe AST parsing
-- Минимальные системные требования / Minimal system requirements
+(Остальные секции будут оформлены аналогично)
 
 ### 🌟 Поддержка проекта / Project Support
 
 <p align="center">
-  <strong>Если вам понравился проект, поставьте ⭐ звезду на GitHub!</strong><br>
-  <strong>If you liked the project, please give a ⭐ star on GitHub!</strong>
+  <strong>🇷🇺 Если вам понравился проект, поставьте ⭐ звезду на GitHub! 🇷🇺</strong><br>
+  <strong>🇬🇧 If you liked the project, please give a ⭐ star on GitHub! 🇬🇧</strong>
 </p>
 
 ## 🛠 Установка / Installation
 
+<p align="center" style="color: blue;">
+🇷🇺 <strong>
 ```bash
-# Русская версия / Russian version
+# Русская версия
 git clone https://github.com/ваш_логин/terminal-calculator.git
-cd terminal-calculator
-pip install -r requirements.txt
-python calculator.py
-
-# English version
-git clone https://github.com/your_login/terminal-calculator.git
 cd terminal-calculator
 pip install -r requirements.txt
 python calculator.py
