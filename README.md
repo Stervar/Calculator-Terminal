@@ -100,3 +100,6 @@ git clone https://github.com/your_login/terminal-calculator.git
 cd terminal-calculator
 pip install -r requirements.txt
 python calculator.py
+
+```
+<h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
