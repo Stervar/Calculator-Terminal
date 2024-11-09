@@ -96,10 +96,10 @@ def draw_calculator_frame(framework, current_input, result):
         if result:
             framework.addstr(start_y + 3, start_x + 35, f"Результат: {result}")
 
-        stdscr.refresh()
+        framework.refresh()
     
     except Exception as e:
-        stdscr.clear()
+        framework.clear()
         stdscr.addstr(0, 0, f"Произошла ошибка: {str(e)}")
         stdscr.refresh()
 
