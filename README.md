@@ -74,7 +74,7 @@
 
 ### 💻 Технические Характеристики / Technical Specifications 💻
 - >Написан на Python / Written in Python
-- Использует curses для интерфейса / Uses curses for interface
+- >Использует curses для интерфейса / Uses curses for interface
 - Безопасный AST-парсинг / Safe AST parsing
 - Минимальные системные требования / Minimal system requirements
 
