@@ -59,7 +59,7 @@
 ### 🚀 Производительность / Performance 🚀
 - >Молниеносные вычисления / Lightning-fast calculations
 - >Минимальное потребление ресурсов / Minimal resource consumption
-- Кроссплатформенность / Cross-platform compatibility
+- >Кроссплатформенность / Cross-platform compatibility
 
 ### 📈 Математические Возможности / Mathematical Capabilities 📈
 - >Поддержка научной нотации / Scientific notation support
