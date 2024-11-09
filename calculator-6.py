@@ -115,10 +115,9 @@ def calculator(stdscr):
         # Обновление экрана
         stdscr.refresh()
 
-def draw_calculator_frame(stdscr, current_input, result):
+def draw_calculator_frame(framework, current_input, result):
     # Получаем размеры экрана
-    height, width = stdscr.getmaxyx()
-    
+    height, width = framework
     # Определяем начальные координаты
     start_y = 2
     start_x = 2
