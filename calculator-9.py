@@ -284,8 +284,9 @@ def calculator(stdscr):
             current_input = current_input[:-1]
         
         elif key == ord('=') or key == 10:  # Enter
-            result = UltraAdvancedSafeCalculator.safe_eval(current_input)
-            current_input = ""
+            # Если текущий ввод пустой, ничего не делаем
+            if not current_input:
+                continue
         
         # Расширенные математические функции
         elif key == ord('s'):  # sin
