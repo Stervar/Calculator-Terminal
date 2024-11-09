@@ -75,7 +75,59 @@ def handle_implicit_multiplication(expression):
     expression = re.sub(r'(\))(\d+)', r'\1*\2', expression)
     return expression
 
+def draw_calculator_frame(framework, current_input, result):
+    """
+    Отрисовка рамки калькулятора
+    """
+    try:
+        # Получаем размеры экрана
+        height, width = framework.getmaxyx()
+        
+        # Определяем начальные координаты
+        start_y = 2
+        start_x = 2
+        
+        # Основная рамка калькулятора 
+        frame = [
+            "╔═══════════════════════════════════════════════════╗",
+            "║                  КАЛЬКУЛЯТОР                      ║",
+            "╠═══════════════════════════════════════════════════╣",
+            "║ Ввод:                                    Результат║",
+            "╠═══════════════════════════════════════════════════╣",
+            "║   7    │    8    │    9    │    /    │    CE      ║",
+            "║--------+---------+---------+---------+------------║",
+            "║   4    │    5    │    6    │    *    │    √       ║",
+            "║--------+---------+---------+---------+------------║",
+            "║   1    │    2    │    3    │    -    │    %       ║",
+            "║--------+---------+---------+---------+------------║",
+            "║   0    │    .    │    +    │ x²  │ 1/x │ ±        ║",
+            "║--------+---------+---------+---------+------------║",
+            "║   log  │    e    │    ^    │    (   │    )        ║",
+            "╠═══════════════════════════════════════════════════╣",
+            "║ Backspace - удаляет символ | CE - удаляет число   ║",
+            "║ C - полная очистка | Расширенные функции          ║",
+            "╚═══════════════════════════════════════════════════╝"
+        ]
+
+        # Отрисовка рамки
+        for idx, line in enumerate(frame):
+            framework.addstr(start_y + idx, start_x, line)
+
+        # Отображение ввода
+        framework.addstr(start_y + 3, start_x + 7, current_input)
+        
+        # Отображение результата
+        if result:
+            framework.addstr(start_y + 3, start_x + 40, result)
+
+    except Exception as e:
+        framework.clear()
+        framework.addstr(0, 0, f"Ошибка отрисовки: {str(e)}")
+
 def calculator(special_keys):
+    """
+    Основная функция калькулятора
+    """
     # Отключаем курсор
     curses.curs_set(0)
     
@@ -89,6 +141,7 @@ def calculator(special_keys):
     while True:
         # Отрисовка основного интерфейса
         draw_calculator_frame(special_keys, current_input, result)
+        special_keys.refresh()  # Обновляем экран
         
         # Получение нажатия клавиши
         key = special_keys.getch()
@@ -109,69 +162,35 @@ def calculator(special_keys):
             current_input = ""
         
         # Обработка цифр и операций
-        elif chr(key) in '0123456789+-*/().,^√':
+        elif chr(key) in '0123456789.+-*/()√^':
             current_input += chr(key)
-        
-        # Обновление экрана
-        special_keys.refresh()
-
-def draw_calculator_frame(framework, current_input, result):
-    # Получаем размеры экрана
-    height, width = framework
-    # Определяем начальные координаты
-    start_y = 2
-    start_x = 2
-    
-    # Основная рамка калькулятора 
-    frame = [
-        "╔═══════════════════════════════════════════════════╗",
-        "║                  КАЛЬКУЛЯТОР                      ║",
-        "╠═══════════════════════════════════════════════════╣",
-        "║ Ввод:                                    Результат║",
-        "╠═══════════════════════════════════════════════════╣",
-        "║   7    │    8    │    9    │    /    │    CE      ║",
-        "║--------+---------+---------+---------+------------║",
-        "║   4    │    5    │    6    │    *    │    √       ║",
-        "║--------+---------+---------+---------+------------║",
-        "║   1    │    2    │    3    │    -    │    %       ║",
-        "║--------+---------+---------+---------+------------║",
-        "║   0    │    .    │    +    │ x²  │ 1/x │ ±        ║",
-        "║--------+---------+---------+---------+------------║",
-        "║   log  │    e    │    ^    │    (   │    )        ║",
-        "╠═══════════════════════════════════════════════════╣",
-        "║ Backspace - удаляет символ | CE - удаляет число   ║",
-        "║ C - полная очистка | Расширенные функции          ║",
-        "╚═══════════════════════════════════════════════════╝"
-    ]
-
-    # Отрисовка рамки
-    for idx, line in enumerate(frame):
-        framework.addstr(start_y + idx, start_x, line)
-
-    # Отображение ввода
-    framework.addstr(start_y + 3, start_x + 7, current_input)
-    
-    # Отображение результата
-    if result:
-        framework.addstr(start_y + 3, start_x + 40, result)
 
 def main():
+    """
+    Инициализация и запуск калькулятора
+    """
     # Инициализация curses
-    something = curses.initscr()
+    special_keys = curses.initscr()
     
     try:
         # Настройки curses
         curses.noecho()
         curses.cbreak()
-        something.keypad(True)
+        special_keys.keypad(True)
         
         # Запуск калькулятора
-        calculator(something)
+        calculator(special_keys)
+    
+    except KeyboardInterrupt:
+        print("Работа калькулятора прервана пользователем.")
+    
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
     
     finally:
         # Восстановление настроек терминала
         curses.nocbreak()
-        something.keypad(False)
+        special_keys.keypad(False)
         curses.echo()
         curses.endwin()
 
