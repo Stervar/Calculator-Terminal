@@ -143,6 +143,7 @@ def calculator(stdscr):
             except:
                 result = "Ошибка"
         
+        
         # Логарифм
         elif key == ord('l'):
             try:
