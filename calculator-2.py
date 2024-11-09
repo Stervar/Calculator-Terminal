@@ -34,7 +34,7 @@ def draw_calculator_frame(stdscr, current_input, result, show_result_button):
         frame.append("║                   │    =    │                   ║")
     
     frame.append("╠═══════════════════════════════════════════════════╣")
-    frame.append("║ Управление: Цифры, +,-,*,/ | C-очистка | q-выход   ║")
+    frame.append("║ Инструкция: Символы:+,-,*,/ | C-очистка | q-выход,║")
     frame.append("╚═══════════════════════════════════════════════════╝")
 
     # Отрисовка рамки
