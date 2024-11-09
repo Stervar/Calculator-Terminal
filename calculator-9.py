@@ -230,7 +230,7 @@ def draw_calculator_frame(stdscr, current_input, result):
             "║--------+---------+---------+---------+------------║",
             "║   log  │    e    │    ^    │    (   │    )        ║",
             "╠═══════════════════════════════════════════════════╣",
-            "║ Backspace - удаляет символ | CE - удаляет число   ║",
+            "║ ←   Удаление символа - удаляет один символ        ║",
             "║ C - полная очистка | Расширенные функции          ║",
             "╚═══════════════════════════════════════════════════╝"
         ]
@@ -258,6 +258,9 @@ def calculator(stdscr):
     curses.start_color()
     curses.curs_set(0)  # Скрываем курсор
     
+    # Включаем возможность чтения специальных клавиш
+    stdscr.keypad(True)
+    
     # Инициализация переменных
     current_input = ""
     result = ""
@@ -273,20 +276,27 @@ def calculator(stdscr):
         if key == ord('q'):
             break
         
+        elif key == curses.KEY_BACKSPACE or key == 127 or key == 8:
+            # Удаление последнего символа
+            current_input = current_input[:-1]
+        
         elif key in [ord(c) for c in '0123456789.+-*/()√^']:
             current_input += chr(key)
         
         elif key == ord('c') or key == ord('C'):
             current_input = ""
             result = ""
-
-        elif key == 263 or key == 127:  # Backspace
-            current_input = current_input[:-1]
         
         elif key == ord('=') or key == 10:  # Enter
             # Если текущий ввод пустой, ничего не делаем
             if not current_input:
                 continue
+            
+            # Вычисление результата
+            try:
+                result = UltraAdvancedSafeCalculator.safe_eval(current_input)
+            except Exception as e:
+                result = str(e)
         
         # Расширенные математические функции
         elif key == ord('s'):  # sin
@@ -305,7 +315,6 @@ def calculator(stdscr):
             current_input += 'tan('
         elif key == ord('g'):  # log10
             current_input += 'log10('
-
 def remove_last_number_or_operator(expression):
     """Удаляет последнее число или оператор"""
     # Разбиваем выражение на части
