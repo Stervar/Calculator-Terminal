@@ -39,16 +39,16 @@ def draw_calculator_frame(stdscr, current_input, result, show_result_button):
 
     # Отрисовка рамки
     for idx, line in enumerate(frame):
-        stdscr.addstr(start_y + idx, start_x, line)
+        framework.addstr(start_y + idx, start_x, line)
 
     # Отображение ввода
-    stdscr.addstr(start_y + 3, start_x + 2, f"Ввод: {current_input}")
+    framework.addstr(start_y + 3, start_x + 2, f"Ввод: {current_input}")
     
     # Отображение результата
     if result:
-        stdscr.addstr(start_y + 3, start_x + 35, f"Результат: {result}")
+        framework.addstr(start_y + 3, start_x + 35, f"Результат: {result}")
 
-    stdscr.refresh()
+    framework.refresh()
 
 def calculator(special_keys):
     # Настройка цветов
