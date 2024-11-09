@@ -1,6 +1,6 @@
 <h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
 
-<h1 align="center">🚀 Революционный Терминальный Калькулятор 🧮 / 🚀 Revolutionary Terminal Calculator 🧮</h1>
+<h1 align="center">🚀 Революционный Терминальный Калькулятор 🧮  🚀 Revolutionary Terminal Calculator 🧮</h1>
 
 <h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
 
