@@ -88,10 +88,10 @@ def calculator(special_keys):
     
     while True:
         # Отрисовка основного интерфейса
-        draw_calculator_frame(stdscr, current_input, result)
+        draw_calculator_frame(special_keys, current_input, result)
         
         # Получение нажатия клавиши
-        key = stdscr.getch()
+        key = special_keys.getch()
         
         # Обработка клавиш
         if key == ord('q') or key == 27:  # q или Esc
@@ -113,7 +113,7 @@ def calculator(special_keys):
             current_input += chr(key)
         
         # Обновление экрана
-        stdscr.refresh()
+        special_keys.refresh()
 
 def draw_calculator_frame(framework, current_input, result):
     # Получаем размеры экрана
