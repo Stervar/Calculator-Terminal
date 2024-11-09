@@ -8,12 +8,11 @@ def draw_calculator_frame(stdscr, current_input, result):
         height, width = stdscr.getmaxyx()
         
         # Проверяем минимальный размер окна
-        if height < 30 or width < 120:  # Увеличил минимальную ширину
+        if height < 30 or width < 150:  # Увеличил минимальную ширину
             stdscr.clear()
             stdscr.addstr(height//2, 0, "Увеличьте размер окна терминала!")
             stdscr.refresh()
             return
-        
         
         # Рассчитываем позицию для центрирования
         calc_width = 60
@@ -22,33 +21,44 @@ def draw_calculator_frame(stdscr, current_input, result):
 
         # Инструкции слева с рамкой
         instructions_left = [
-            "║ Кнопки   Использование                             ║",
-            "║ 1-9,0    Ввод цифр                                 ║",
-            "║ +−×÷     Мат. операции                             ║",
-            "║ =        Результат                                 ║",
-            "║ C        Очистка экрана                            ║",
-            "║ ←        Удаление символа                          ║",
-            "║ ±        Смена знака                               ║"
+            "╔═══════════════════════════════════╗",
+            "║           УПРАВЛЕНИЕ             ║",
+            "╠═══════════════════════════════════╣",
+            "║ Кнопки    Действие               ║",
+            "╠═══════════════════════════════════╣",
+            "║ 1-9,0     Ввод цифр              ║",
+            "║ +−×÷      Мат. операции          ║",
+            "║ =         Результат              ║",
+            "║ C         Очистка экрана         ║",
+            "║ ←         Удаление символа       ║",
+            "║ ±         Смена знака            ║",
+            "╚═══════════════════════════════════╝"
         ]
 
         # Инструкции справа с рамкой
         instructions_right = [
-            "║ ( )      Скобки                                    ║",
-            "║ .        Десятичная дробь                          ║",
-            "║ 1/x      Обратное число                            ║",
-            "║ x²       Возведение в квадрат                      ║",
-            "║ √        Квадратный корень                         ║",
-            "║ log      Логарифм                                  ║",
-            "║ e        Число Эйлера                              ║"
+            "╔═══════════════════════════════════╗",
+            "║         ДОПОЛНИТЕЛЬНО            ║",
+            "╠═══════════════════════════════════╣",
+            "║ Кнопки    Действие               ║",
+            "╠═══════════════════════════════════╣",
+            "║ ( )       Скобки                 ║",
+            "║ .         Десятичная дробь       ║",
+            "║ 1/x       Обратное число         ║",
+            "║ x²        Возведение в квадрат   ║",
+            "║ √         Квадратный корень      ║",
+            "║ log       Логарифм               ║",
+            "║ e         Число Эйлера           ║",
+            "╚═══════════════════════════════════╝"
         ]
 
         # Отрисовка левых инструкций
         for i, line in enumerate(instructions_left):
-            stdscr.addstr(start_y + 6 + i, start_x - 50, line)
+            stdscr.addstr(start_y + i, start_x - 40, line)
 
         # Отрисовка правых инструкций
         for i, line in enumerate(instructions_right):
-            stdscr.addstr(start_y + 6 + i, start_x + calc_width + 5, line)
+            stdscr.addstr(start_y + i, start_x + calc_width + 5, line)
 
         # Основная рамка калькулятора 
         frame = [
@@ -82,52 +92,6 @@ def draw_calculator_frame(stdscr, current_input, result):
         stdscr.refresh()
     
     except Exception as e:
-        stdscr.clear()
-        stdscr.addstr(0, 0, f"Произошла ошибка: {str(e)}")
-        stdscr.refresh()
-
-        # Добавляем разделитель
-        frame.append("╠═══════════════════════════════════════════════════╣")
-        
-        # Добавляем инструкции слева
-        frame.extend(instructions_left)
-        
-        # Добавляем разделитель между левыми и правыми инструкциями
-        frame.append("╠═══════════════════════════════════════════════════╣")
-        
-        # Добавляем инструкции справа
-        frame.extend(instructions_right)
-        
-        # Добавляем последние строки
-        frame.append("╠═══════════════════════════════════════════════════╣")
-        frame.append("║ Backspace - удаляет символ | CE - удаляет число   ║")
-        frame.append("║ C - полная очистка | Расширенные функции          ║")
-        frame.append("╚═══════════════════════════════════════════════════╝")
-
-        # Отрисовка рамки с обработкой ошибок
-        for idx, line in enumerate(frame):
-            try:
-                stdscr.addstr(start_y + idx, start_x, line)
-            except curses.error:
-                break
-
-        # Отображение ввода
-        try:
-            stdscr.addstr(start_y + 3, start_x + 2, f"Ввод: {current_input}")
-        except curses.error:
-            pass
-        
-        # Отображение результата
-        if result:
-            try:
-                stdscr.addstr(start_y + 3, start_x + 35, f"Результат: {result}")
-            except curses.error:
-                pass
-
-        stdscr.refresh()
-    
-    except Exception as e:
-        # Обработка любых непредвиденных ошибок
         stdscr.clear()
         stdscr.addstr(0, 0, f"Произошла ошибка: {str(e)}")
         stdscr.refresh()
@@ -198,6 +162,7 @@ def calculator(stdscr):
             except Exception:
                 result = "Ошибка"
         
+        
         # Квадратный корень
         elif key == ord('r') or key == ord('R'):
             try:
@@ -226,9 +191,9 @@ def calculator(stdscr):
                 result = "Ошибка"
         
         # Логарифм
-        elif key == ord('i'):  # inverse
+        elif key == ord('l'):  # log
             try:
-                result = str(1 / float(current_input))
+                result = str(math.log(float(current_input)))
                 current_input = ""
             except:
                 result = "Ошибка"
