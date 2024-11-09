@@ -110,11 +110,10 @@ class SafeCalculator:
         
         return expression
 
-def draw_calculator_frame(stdscr, current_input, result):
-    # [Ваш предыдущий код отрисовки с незначительными изменениями]
+def draw_calculator_frame(framework, current_input, result):
     pass
 
-def calculator(stdscr):
+def calculator(framework):
     curses.start_color()
     curses.curs_set(0)
     
