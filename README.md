@@ -82,7 +82,7 @@ This is not just a calculator - it's a full-fledged mathematical tool that trans
 
 
   >Если вам понравился проект, поставьте ⭐ звезду на GitHub!
-  If you liked the project, please give a ⭐ star on GitHub!
+  >If you liked the project, please give a ⭐ star on GitHub!
 
 
 ## 🛠 Установка / Installation
