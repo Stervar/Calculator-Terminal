@@ -89,14 +89,7 @@
 ## 🛠 Установка / Installation
 
 ```bash
-# Русская версия / Russian version
 git clone https://github.com/ваш_логин/terminal-calculator.git
-cd terminal-calculator
-pip install -r requirements.txt
-python calculator.py
-
-# English version
-git clone https://github.com/your_login/terminal-calculator.git
 cd terminal-calculator
 pip install -r requirements.txt
 python calculator.py
