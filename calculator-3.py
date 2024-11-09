@@ -2,9 +2,9 @@ import curses
 import math
 import re
 
-def draw_calculator_frame(stdscr, current_input, result):
+def draw_calculator_frame(framework, current_input, result):
     # Получаем размеры экрана
-    height, width = stdscr.getmaxyx()
+    height, width = framework.getmaxyx()
     
     # Рассчитываем позицию для центрирования
     calc_width = 60
@@ -12,7 +12,7 @@ def draw_calculator_frame(stdscr, current_input, result):
     start_y = (height - 20) // 2
 
     # Стираем предыдущее содержимое
-    stdscr.clear()
+    framework.clear()
 
     # Рамка калькулятора
     frame = [
