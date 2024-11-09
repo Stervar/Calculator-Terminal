@@ -157,16 +157,16 @@ def draw_calculator_frame(framework, current_input, result):
 
 def main():
     # Инициализация curses
-    stdscr = curses.initscr()
+    something = curses.initscr()
     
     try:
         # Настройки curses
         curses.noecho()
         curses.cbreak()
-        stdscr.keypad(True)
+        something.keypad(True)
         
         # Запуск калькулятора
-        calculator(stdscr)
+        calculator(something)
     
     finally:
         # Восстановление настроек терминала
