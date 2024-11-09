@@ -76,7 +76,7 @@
 - >Написан на Python / Written in Python
 - >Использует curses для интерфейса / Uses curses for interface
 - >Безопасный AST-парсинг / Safe AST parsing
-- Минимальные системные требования / Minimal system requirements
+- >Минимальные системные требования / Minimal system requirements
 
 ### 🌟 Поддержка проекта / Project Support 🌟
 
