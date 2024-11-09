@@ -50,7 +50,7 @@ def draw_calculator_frame(framework, current_input, result):
 
     framework.refresh()
 
-def calculator(stdscr):
+def calculator(special_keys):
     # Настройка цветов
     curses.start_color()
     curses.curs_set(0)  # Скрываем курсор
@@ -61,10 +61,10 @@ def calculator(stdscr):
     
     while True:
         # Отрисовка калькулятора
-        draw_calculator_frame(stdscr, current_input, result)
+        draw_calculator_frame(special_keys, current_input, result)
         
         # Получение нажатия клавиши
-        key = stdscr.getch()
+        key = special_keys.getch()
         
         # Обработка нажатий
         if key == ord('q'):
