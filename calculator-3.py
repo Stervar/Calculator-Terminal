@@ -70,7 +70,7 @@ def calculator(stdscr):
             break
         
         elif key in [ord('0'), ord('1'), ord('2'), ord('3'), ord('4'), 
-                     ord('5'), ord('6'), ord('7'), ord('8'), ord('9'), ord('.')]:
+                    ord('5'), ord('6'), ord('7'), ord('8'), ord('9'), ord('.')]:
             # Если есть результат, начинаем новый ввод
             if result:
                 current_input = chr(key)
