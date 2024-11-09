@@ -1,6 +1,6 @@
 <h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
 
-# 🚀 Революционный Терминальный Калькулятор 🧮 / 🚀 Revolutionary Terminal Calculator 🧮
+<h1 align="center">🚀 Революционный Терминальный Калькулятор 🧮 / 🚀 Revolutionary Terminal Calculator 🧮</h1>
 
 <h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
 
@@ -78,7 +78,7 @@
 - >Безопасный AST-парсинг / Safe AST parsing
 - >Минимальные системные требования / Minimal system requirements
 
-<h3 align="center">🌟 Поддержка проекта / Project Support 🌟</h3>
+### 🌟 Поддержка проекта / Project Support 🌟
 
 
   >Если вам понравился проект, поставьте ⭐ звезду на GitHub!
