@@ -12,17 +12,17 @@
 
 ## 🏆 Уникальность Проекта / Project Uniqueness
 
-<p align="center" style="color: blue;">
+<p align="center">
 🇷🇺 <strong>Это не просто калькулятор - это полноценный математический инструмент, который превращает терминал в мощную вычислительную лабораторию! 🏆</strong>
 </p>
 
-<p align="center" style="color: red;">
+<p align="center">
 🇬🇧 <em>This is not just a calculator - it's a full-fledged mathematical tool that transforms the terminal into a powerful computational laboratory! 🚀</em>
 </p>
 
 ## 🔥 Killer-фичи / Killer Features
 
-<p align="center" style="color: blue;">
+<p align="center">
 🇷🇺 <strong>
 - 🧮 Неявное умножение
 - 🚀 Автодополнение функций
@@ -31,7 +31,7 @@
 </strong>
 </p>
 
-<p align="center" style="color: red;">
+<p align="center">
 🇬🇧 <em>
 - 🧮 Implicit Multiplication
 - 🚀 Function Autocompletion
@@ -44,7 +44,7 @@
 
 ### 🔒 Абсолютная Безопасность / Absolute Security
 
-<p align="center" style="color: blue;">
+<p align="center">
 🇷🇺 <strong>
 - Передовая система защиты от математических инъекций
 - Полный контроль над вычислениями
@@ -52,7 +52,7 @@
 </strong>
 </p>
 
-<p align="center" style="color: red;">
+<p align="center">
 🇬🇧 <em>
 - Advanced protection against mathematical injections
 - Full computation control
@@ -62,7 +62,7 @@
 
 ### 🧠 Интеллектуальный Движок Вычислений / Intelligent Computation Engine
 
-<p align="center" style="color: blue;">
+<p align="center">
 🇷🇺 <strong>
 - Поддержка более 50 математических функций
 - Работа с комплексными числами
@@ -70,15 +70,13 @@
 </strong>
 </p>
 
-<p align="center" style="color: red;">
+<p align="center">
 🇬🇧 <em>
 - Support for over 50 mathematical functions
 - Complex number handling
 - Automatic computation type detection
 </em>
 </p>
-
-(Остальные секции будут оформлены аналогично)
 
 ### 🌟 Поддержка проекта / Project Support
 
@@ -89,7 +87,7 @@
 
 ## 🛠 Установка / Installation
 
-<p align="center" style="color: blue;">
+<p align="center">
 🇷🇺 <strong>
 ```bash
 # Русская версия
