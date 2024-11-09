@@ -207,11 +207,11 @@ def draw_calculator_frame(stdscr, current_input, result):
 
         # Отрисовка левых инструкций
         for i, line in enumerate(instructions_left):
-            stdscr.addstr(start_y + i, start_x - 40, line)
+            stdscr.addstr(start_y + i, start_x - 45, line)
 
         # Отрисовка правых инструкций
         for i, line in enumerate(instructions_right):
-            stdscr.addstr(start_y + i, start_x + calc_width + 5, line)
+            stdscr.addstr(start_y + i, start_x + calc_width + 1, line)
 
         # Основная рамка калькулятора 
         frame = [
