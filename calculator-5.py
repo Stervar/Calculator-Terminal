@@ -10,8 +10,8 @@ def draw_calculator_frame(framework, current_input, result):
         # Проверяем минимальный размер окна
         if height < 30 or width < 150:  # Увеличил минимальную ширину
             framework.clear()
-            stdscr.addstr(height//2, 0, "Увеличьте размер окна терминала!")
-            stdscr.refresh()
+            framework.addstr(height//2, 0, "Увеличьте размер окна терминала!")
+            framework.refresh()
             return
         
         # Рассчитываем позицию для центрирования
@@ -54,11 +54,11 @@ def draw_calculator_frame(framework, current_input, result):
 
         # Отрисовка левых инструкций
         for i, line in enumerate(instructions_left):
-            stdscr.addstr(start_y + i, start_x - 40, line)
+            framework.addstr(start_y + i, start_x - 40, line)
 
         # Отрисовка правых инструкций
         for i, line in enumerate(instructions_right):
-            stdscr.addstr(start_y + i, start_x + calc_width + 5, line)
+            framework.addstr(start_y + i, start_x + calc_width + 5, line)
 
         # Основная рамка калькулятора 
         frame = [
