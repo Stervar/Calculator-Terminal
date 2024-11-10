@@ -6,7 +6,7 @@
 
 
 <p align="center">
-  <img src="![Снимок экрана (5)](https://github.com/user-attachments/assets/51e1d4ca-318c-42f4-be69-4caae5ea87fc)">
+  <img src="https://github.com/Stervar/Calculator-Terminal/blob/main/Снимок%20экрана%20(5).png)">
 </p>
 
 <h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
