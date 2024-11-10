@@ -4,8 +4,9 @@
 
 <h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
 
+
 <p align="center">
-  <img src="https://github.dev/Stervar/Stervar/blob/main/assets/Снимок%20экрана%20(5).png" alt="Header">
+  <img src="![Снимок экрана (5)](https://github.com/user-attachments/assets/51e1d4ca-318c-42f4-be69-4caae5ea87fc)">
 </p>
 
 <h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
