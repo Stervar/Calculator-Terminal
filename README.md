@@ -5,7 +5,7 @@
 <h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
 
 <p align="center">
-  <img src="https://github.com/Stervar/Stervar/blob/main/assets/f53336607ee8c6478f25d2665d7d5c3b.gif" alt="Header">
+  <img src="https://github.dev/Stervar/Stervar/blob/main/assets/Снимок%20экрана%20(5).png" alt="Header">
 </p>
 
 <h2 align="center">◢⸻⸻⸻⸻⸻⸻⸻⸻❃⸻⸻⸻⸻⸻⸻⸻⸻◣</h2>
