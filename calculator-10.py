@@ -226,7 +226,7 @@ class UltraAdvancedSafeCalculator:
         else:
             raise ValueError(f"Неподдерживаемый тип узла: {type(node)}")
 
-def draw_loading_screen(stdscr):
+def draw_loading_screen(loading_screen):
     """
     Отрисовка загрузочного экрана
     """
@@ -234,22 +234,22 @@ def draw_loading_screen(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
 
     curses.curs_set(0)  # Скрываем курсор
-    stdscr.clear()
+    loading_screen.clear()
     
     # Получаем размеры экрана
-    height, width = stdscr.getmaxyx()
+    height, width = loading_screen.getmaxyx()
     
     # Центрирование надписи
     def draw_centered_text(text_lines, start_row):
         for i, line in enumerate(text_lines):
             x = (width - len(line)) // 2
-            stdscr.addstr(start_row + i, x, line, curses.color_pair(1))
+            loading_screen.addstr(start_row + i, x, line, curses.color_pair(1))
 
     # Отрисовка больших надписей
     draw_centered_text(loading_text, height // 4)
     draw_centered_text(creator_text, height - 10)
 
-    stdscr.refresh()
+    loading_screen.refresh()
     time.sleep(2)
 
 def draw_calculator_frame(framework, current_input, result):
