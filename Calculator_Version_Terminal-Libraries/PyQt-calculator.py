@@ -402,3 +402,5 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     splash = SplashScreen()
     sys.exit(app.exec_())
+
+    

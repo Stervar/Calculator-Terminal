@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="base_library5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/calculator-10/base_library.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

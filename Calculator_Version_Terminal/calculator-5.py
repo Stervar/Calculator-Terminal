@@ -1,23 +1,34 @@
-import curses
-import math
-import re
+import curses  # Импортируем библиотеку curses для работы с консольным интерфейсом
+import math  # Импортируем библиотеку math для математических операций
+import re  # Импортируем библиотеку re для работы с регулярными выражениями
 
 def draw_calculator_frame(framework, current_input, result):
+    """
+    Отрисовывает графический интерфейс калькулятора в консоли.
+
+    Args:
+        framework: Объект curses, предоставляющий доступ к консольному интерфейсу.
+        current_input: Текущее введенное пользователем выражение.
+        result: Результат вычислений.
+
+    Returns:
+        None.
+    """
     try:
         # Получаем размеры экрана
         height, width = framework.getmaxyx()
         
         # Проверяем минимальный размер окна
         if height < 30 or width < 150:  # Увеличил минимальную ширину
-            framework.clear()
-            framework.addstr(height//2, 0, "Увеличьте размер окна терминала!")
-            framework.refresh()
-            return
+            framework.clear()  # Очищаем экран
+            framework.addstr(height//2, 0, "Увеличьте размер окна терминала!")  # Выводим сообщение об ошибке
+            framework.refresh()  # Обновляем экран
+            return  # Выходим из функции
         
         # Рассчитываем позицию для центрирования
-        calc_width = 60
-        start_x = max(0, (width - calc_width) // 2)
-        start_y = max(0, (height - 24) // 2)
+        calc_width = 60  # Ширина калькулятора
+        start_x = max(0, (width - calc_width) // 2)  # Начальная позиция по оси X для центрирования
+        start_y = max(0, (height - 24) // 2)  # Начальная позиция по оси Y для центрирования
 
         # Инструкции слева с рамкой
         instructions_left = [
@@ -54,11 +65,11 @@ def draw_calculator_frame(framework, current_input, result):
 
         # Отрисовка левых инструкций
         for i, line in enumerate(instructions_left):
-            framework.addstr(start_y + i, start_x - 40, line)
+            framework.addstr(start_y + i, start_x - 40, line)  # Выводим строку инструкции на заданную позицию
 
         # Отрисовка правых инструкций
         for i, line in enumerate(instructions_right):
-            framework.addstr(start_y + i, start_x + calc_width + 5, line)
+            framework.addstr(start_y + i, start_x + calc_width + 5, line)  # Выводим строку инструкции на заданную позицию
 
         # Основная рамка калькулятора 
         frame = [
@@ -82,154 +93,161 @@ def draw_calculator_frame(framework, current_input, result):
             "╚═══════════════════════════════════════════════════╝"
         ]
         
-        
-
         # Отрисовка рамки
         for idx, line in enumerate(frame):
-            framework.addstr(start_y + idx, start_x, line)
-
+            framework.addstr(start_y + idx, start_x, line)  # Выводим каждую строку рамки на заданную позицию
 
         # Отображение ввода
-        framework.addstr(start_y + 3, start_x + 7, current_input)
+        framework.addstr(start_y + 3, start_x + 7, current_input)  # Выводим текущее введенное выражение
         
         # Отображение результата
         if result:
-            framework.addstr(start_y + 3, start_x + 35, f"Результат: {result}")
+            framework.addstr(start_y + 3, start_x + 35, f"Результат: {result}")  # Выводим результат вычислений
 
-        framework.refresh()
+        framework.refresh()  # Обновляем экран для отображения изменений
     
     except Exception as e:
-        framework.clear()
-        framework.addstr(0, 0, f"Произошла ошибка: {str(e)}")
-        framework.refresh()
+        framework.clear()  # Очищаем экран в случае ошибки
+        framework.addstr(0, 0, f"Произошла ошибка: {str(e)}")  # Выводим сообщение об ошибке
+        framework.refresh()  # Обновляем экран
 
 def calculator(special_keys):
+    """
+    Основная функция калькулятора, обрабатывающая ввод и вычисления.
+
+    Args:
+        special_keys: Объект curses, предоставляющий доступ к клавиатурному вводу.
+
+    Returns:
+        None.
+    """
     # Настройка цветов
-    curses.start_color()
-    curses.curs_set(0)  # Скрываем курсор
+    curses.start_color()  # Инициализация цветовой схемы
+    curses.curs_set(0)  # Скрываем курсор для улучшения интерфейса
     
     # Инициализация переменных
-    current_input = ""
-    result = ""
+    current_input = ""  # Переменная для хранения текущего ввода
+    result = ""  # Переменная для хранения результата вычислений
     
     while True:
         # Отрисовка калькулятора
         draw_calculator_frame(special_keys, current_input, result)
         
         # Получение нажатия клавиши
-        key = special_keys.getch()
+        key = special_keys.getch()  # Чтение нажатой клавиши
         
         # Обработка нажатий
-        if key == ord('q'):
+        if key == ord('q'):  # Выход из программы при нажатии 'q'
             break
         
         elif key in [ord('0'), ord('1'), ord('2'), ord('3'), ord('4'), 
                     ord('5'), ord('6'), ord('7'), ord('8'), ord('9'), ord('.')]:
             # Если есть результат, начинаем новый ввод
             if result:
-                current_input = chr(key)
-                result = ""
+                current_input = chr(key)  # Начинаем новый ввод с нажатой цифры
+                result = ""  # Сбрасываем результат
             else:
-                current_input += chr(key)
+                current_input += chr(key)  # Добавляем цифру к текущему вводу
         
         elif key in [ord('+'), ord('-'), ord('*'), ord('/')]:
             # Если есть результат, используем его как начало нового выражения
             if result:
-                current_input = result + chr(key)
-                result = ""
+                current_input = result + chr(key)  # Начинаем новое выражение с результата
+                result = ""  # Сбрасываем результат
             else:
-                current_input += chr(key)
+                current_input += chr(key)  # Добавляем оператор к текущему вводу
         
         # Полная очистка (C)
         elif key == ord('c') or key == ord('C'):
-            current_input = ""
-            result = ""
+            current_input = ""  # Очищаем текущий ввод
+            result = ""  # Очищаем результат
         
         # Очистка последнего элемента (CE)
         elif key == ord('e') or key == ord('E'):
-            current_input = remove_last_number_or_operator(current_input)
+            current_input = remove_last_number_or_operator(current_input)  # Удаляем последний элемент ввода
         
         # Backspace - удаление последнего символа
         elif key == 263 or key == 127:  # Коды Backspace
-            current_input = current_input[:-1]
+            
+            current_input = current_input[:-1]  # Удаляем последний символ из текущего ввода
         
         # Вычисление результата
-        elif key == ord('=') or key == 10:
+        elif key == ord('=') or key == 10:  # Нажатие '=' или Enter
             try:
-                result = str(eval(current_input))
+                result = str(eval(current_input))  # Вычисляем результат выражения
                 current_input = ""  # Очищаем ввод после получения результата
             except Exception:
-                result = "Ошибка"
+                result = "Ошибка"  # В случае ошибки выводим сообщение об ошибке
         
         # Процент
         elif key == ord('%'):
             try:
-                result = str(eval(f"{current_input}/100"))
-                current_input = ""
+                result = str(eval(f"{current_input}/100"))  # Вычисляем процент от текущего ввода
+                current_input = ""  # Очищаем ввод
             except Exception:
-                result = "Ошибка"
-        
+                result = "Ошибка"  # В случае ошибки выводим сообщение об ошибке
         
         # Квадратный корень
         elif key == ord('r') or key == ord('R'):
             try:
-                result = str(math.sqrt(float(current_input)))
-                current_input = ""
+                result = str(math.sqrt(float(current_input)))  # Вычисляем квадратный корень
+                current_input = ""  # Очищаем ввод
             except:
-                result = "Ошибка"
+                result = "Ошибка"  # В случае ошибки выводим сообщение об ошибке
         
         # Возведение в степень
         elif key == ord('^'):
-            current_input += '**'
+            current_input += '**'  # Добавляем оператор возведения в степень
         
         # Смена знака
-        elif key == ord('s'):  # sign
+        elif key == ord('s'):  # Для смены знака
             try:
-                current_input = str(-float(current_input))
+                current_input = str(-float(current_input))  # Меняем знак текущего числа
             except:
-                result = "Ошибка"
+                result = "Ошибка"  # В случае ошибки выводим сообщение об ошибке
         
         # Обратное число
-        elif key == ord('i'):  # inverse
+        elif key == ord('i'):  # Для вычисления обратного числа
             try:
-                result = str(1 / float(current_input))
-                current_input = ""
+                result = str(1 / float(current_input))  # Вычисляем обратное число
+                current_input = ""  # Очищаем ввод
             except:
-                result = "Ошибка"
+                result = "Ошибка"  # В случае ошибки выводим сообщение об ошибке
         
         # Логарифм
-        elif key == ord('l'):  # log
+        elif key == ord('l'):  # Для вычисления логарифма
             try:
-                result = str(math.log(float(current_input)))
-                current_input = ""
+                result = str(math.log(float(current_input)))  # Вычисляем логарифм
+                current_input = ""  # Очищаем ввод
             except:
-                result = "Ошибка"
+                result = "Ошибка"  # В случае ошибки выводим сообщение об ошибке
         
         # Открывающая скобка
         elif key == ord('('):
-            current_input += '('
+            current_input += '('  # Добавляем открывающую скобку к текущему вводу
         
         # Закрывающая скобка
         elif key == ord(')'):
-            current_input += ')'
+            current_input += ')'  # Добавляем закрывающую скобку к текущему вводу
         
         # Константа e
         elif key == ord('e'):
-            current_input += str(math.e)
+            current_input += str(math.e)  # Добавляем значение числа Эйлера к текущему вводу
 
 def remove_last_number_or_operator(expression):
-    """Удаляет последнее число или оператор"""
-    # Разбиваем выражение на части
+    """Удаляет последнее число или оператор из выражения."""
+    # Разбиваем выражение на части с помощью регулярных выражений
     parts = re.findall(r'[\d.]+|[+\-*/]', expression)
     
     # Если есть элементы, удаляем последний
     if parts:
-        return expression[:-len(parts[-1])]
+        return expression[:-len(parts[-1])]  # Возвращаем выражение без последнего элемента
     
-    return expression
+    return expression  # Если нет элементов, возвращаем исходное выражение
 
 def main():
-    curses.wrapper(calculator)
+    """Главная функция, запускающая калькулятор."""
+    curses.wrapper(calculator)  # Запускаем калькулятор в контексте curses
 
 if __name__ == "__main__":
-    main()
+    main()  # Запускаем программу
