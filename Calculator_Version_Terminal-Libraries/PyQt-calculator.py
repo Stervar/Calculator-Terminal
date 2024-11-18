@@ -1,37 +1,21 @@
-import sys
-import math
-import re
-import ast
-import operator
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QGridLayout, QLineEdit, QLabel, QProgressBar
-from PyQt5.QtGui import QFont, QPixmap
-from PyQt5.QtCore import QTimer, Qt, QPropertyAnimation
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QProgressBar, QFrame
-from PyQt5.QtCore import QPropertyAnimation, QTimer, Qt
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QProgressBar, QPushButton
-from PyQt5.QtCore import QPropertyAnimation, QTimer, Qt
-from PyQt5.QtGui import QPixmap
-import sys
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QMessageBox, QTextEdit
-from PyQt5.QtGui import QFont
-from PyQt5.QtMultimedia import QSound
-import sys
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QMessageBox, QTextEdit
-from PyQt5.QtGui import QFont
-from PyQt5.QtMultimedia import QSound
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+import sys  # Импортируем модуль sys для работы с параметрами командной строки
+import math  # Импортируем библиотеку math для математических операций
+import re  # Импортируем библиотеку re для работы с регулярными выражениями
+import ast  # Импортируем библиотеку для работы с абстрактным синтаксическим деревом (AST)
+import operator  # Импортируем библиотеку operator для работы с операциями
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QGridLayout, QLineEdit, QLabel, QProgressBar, QTextEdit, QMessageBox  # Импортируем необходимые классы из PyQt5
+from PyQt5.QtGui import QFont, QPixmap  # Импортируем класс QFont и QPixmap для настройки шрифтов и изображений
+from PyQt5.QtCore import QTimer, Qt, QPropertyAnimation  # Импортируем классы для таймеров и анимации
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent  # Импортируем классы для работы со звуком
 from PyQt5.QtCore import QUrl
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QWidget, QPushButton, QLineEdit, QTextEdit, QGridLayout, QMessageBox, QVBoxLayout
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
-from PyQt5.QtCore import QUrl
-from PyQt5.QtGui import QFont
+
 
 
 
 class UltraAdvancedSafeCalculator:
+    """
+    Класс для безопасного вычисления математических выражений.
+    """
     SAFE_FUNCTIONS = {
         # Основные математические функции
         'abs': abs,
@@ -109,54 +93,70 @@ class UltraAdvancedSafeCalculator:
 
     @classmethod
     def safe_eval(cls, expression):
+        """
+        Безопасная оценка математического выражения.
+        """
         try:
-            expression = cls.preprocess_expression(expression)
-            if not re.match(r'^[0-9+\-*/().,a-zA-Z\s]+$', expression):
-                return "Недопустимые символы в выражении"
-            parsed = ast.parse(expression, mode='eval')
-            result = cls.eval_node(parsed.body)
-            return cls.format_result(result)
+            expression = cls.preprocess_expression(expression)  # Предобработка выражения
+            if not re.match(r'^[0-9+\-*/().,a-zA-Z\s]+$', expression):  # Проверка на допустимые символы
+                return "Недопустимые символы в выражении"  # Сообщение об ошибке
+            parsed = ast.parse(expression, mode='eval')  # Парсинг выражения в AST
+            result = cls.eval_node(parsed.body)  # Оценка корневого узла AST
+            return cls.format_result(result)  # Форматирование результата
         except Exception as e:
-            return f"Ошибка: {str(e)}"
+            return f"Ошибка: {str(e)}"  # Возв ```python
+            return f"Ошибка: {str(e)}"  # Возврат сообщения об ошибке
 
     @classmethod
     def preprocess_expression(cls, expression):
-        expression = expression.replace('^', '**')
-        expression = expression.replace('√', 'sqrt(')  # Заменяем √ на sqrt(
+        """
+        Предобработка выражения для замены специальных символов.
+        """
+        expression = expression.replace('^', '**')  # Замена ^ на **
+        expression = expression.replace('√', 'sqrt(')  # Замена √ на sqrt(
         return expression
 
     @classmethod
     def eval_node(cls, node):
+        """
+        Оценка узла AST.
+        """
         if isinstance(node, ast.Num):
-            return node.n
+            return node.n  # Возврат числа
         elif isinstance(node, ast.BinOp):
-            left = cls.eval_node(node.left)
-            right = cls.eval_node(node.right)
-            op = cls.SAFE_OPERATORS.get(type(node.op))
-            return op(left, right)
+            left = cls.eval_node(node.left)  # Оценка левого подузла
+            right = cls.eval_node(node.right)  # Оценка правого подузла
+            op = cls.SAFE_OPERATORS.get(type(node.op))  # Получение оператора
+            return op(left, right)  # Применение оператора
         elif isinstance(node, ast.Call):
-            func_name = node.func.id
-            func = cls.SAFE_FUNCTIONS.get(func_name)
+            func_name = node.func.id  # Получение имени функции
+            func = cls.SAFE_FUNCTIONS.get(func_name)  # Получение функции
             if func:
-                args = [cls.eval_node(arg) for arg in node.args]
-                return func(*args)
-            raise ValueError(f"Неподдерживаемая функция: {func_name}")
-        raise ValueError("Неподдерживаемый тип узла")
+                args = [cls.eval_node(arg) for arg in node.args]  # Оценка аргументов
+                return func(*args)  # Вызов функции с аргументами
+            raise ValueError(f"Неподдерживаемая функция: {func_name}")  # Ошибка для неподдерживаемой функции
+        raise ValueError("Неподдерживаемый тип узла")  # Ошибка для неподдерживаемого типа узла
 
     @classmethod
     def format_result(cls, result):
-                if isinstance(result, float):
-                    return f"{result:.10f}".rstrip('0').rstrip('.')
-                return str(result)
+        """
+        Форматирование результата для вывода.
+        """
+        if isinstance(result, float):
+            return f"{result:.10f}".rstrip('0').rstrip('.')  # Форматирование числа с плавающей точкой
+        return str(result)  # Возврат результата как строки
 
 
 class Calculator(QWidget):
+    """
+    Класс для создания графического интерфейса калькулятора.
+    """
     def __init__(self):
         super().__init__()
         self.player = QMediaPlayer()  # Создаем экземпляр QMediaPlayer
         self.is_dark_theme = True  # Переменная для хранения текущей темы
-        self.setWindowTitle("Научный Калькулятор")
-        self.setGeometry(100, 100, 600, 600)
+        self.setWindowTitle("Научный Калькулятор")  # Заголовок окна
+        self.setGeometry(100, 100, 600, 600)  # Размеры окна
 
         self.history = []  # Список для хранения истории вычислений
         font = QFont("Arial", 20)  # Шрифт для кнопок и текстового поля
@@ -173,21 +173,21 @@ class Calculator(QWidget):
         self.export_button = QPushButton("Экспорт")
         self.export_button.clicked.connect(self.export_history)
 
-        layout = QGridLayout()
+        layout = QGridLayout()  # Создание сеточного макета
         layout.addWidget(self.theme_button, 0, 0)
         layout.addWidget(self.help_button, 0, 1)
         layout.addWidget(self.export_button, 0, 2)
 
         # Поле для вывода результатов
         self.result = QLineEdit()
-        self.result.setReadOnly(True)
-        self.result.setFont(font)
+        self.result.setReadOnly(True)  # Поле только для чтения
+        self.result.setFont(font)  # Установка шрифта
         self.result.setStyleSheet("background-color: #1E1E1E; color: white; padding: 10px; border-radius: 5px;")
         layout.addWidget(self.result, 1, 0, 1, 5)
 
         # Область для истории вычислений
         self.history_area = QTextEdit()
-        self.history_area.setReadOnly(True)
+        self.history_area.setReadOnly(True)  # Поле только для чтения
         layout.addWidget(self.history_area, 2, 0, 1, 5)
 
         # Определение кнопок калькулятора
@@ -202,13 +202,13 @@ class Calculator(QWidget):
         ]
 
         for (text, row, col) in buttons:
-            button = QPushButton(text)
-            button.setFont(font)
+            button = QPushButton(text)  # Создание кнопки
+            button.setFont(font)  # Установка шрифта
             button.setStyleSheet("background-color: #4C4C4C; color: white; padding: 20px; border-radius: 5px;")
-            button.pressed.connect(lambda b=button: self.on_button_pressed(b))
-            button.released.connect(lambda b=button: self.on_button_released(b))
-            button.clicked.connect(lambda checked, b=text: self.on_button_click(b))
-            layout.addWidget(button, row, col)
+            button.pressed.connect(lambda b=button: self.on_button_pressed(b))  # Обработка нажатия кнопки
+            button.released.connect(lambda b=button: self.on_button_released(b))  # Обработка отпускания кнопки
+            button.clicked.connect(lambda checked, b=text: self.on_button_click(b))  # Обработка клика по кнопке
+            layout.addWidget(button, row, col)  # Добавление кнопки в макет
 
         # Центрируем кнопки скобок
         self.bracket_layout = QGridLayout()
@@ -216,15 +216,15 @@ class Calculator(QWidget):
         self.right_bracket_button = QPushButton(")")
         self.left_bracket_button.setFont(font)
         self.right_bracket_button.setFont(font)
-        self.left_bracket_button.clicked.connect(lambda: self.on_button_click('('))
-        self.right_bracket_button.clicked.connect(lambda: self.on_button_click(')'))
-        
+        self.left_bracket_button.clicked.connect(lambda: self.on_button_click('('))  # Обработка нажатия на (
+        self.right_bracket_button.clicked.connect(lambda: self.on_button_click(')'))  # Обработка нажатия на )
+
         self.bracket_layout.addWidget(self.left_bracket_button, 0, 0)
         self.bracket_layout.addWidget(self.right_bracket_button, 0, 1)
-        
+
         layout.addLayout(self.bracket_layout, 10, 0, 1, 5)  # Добавляем в основной layout
 
-        self.setLayout(layout)
+        self.setLayout(layout)  # Установка макета для виджета
         self.apply_theme()  # Применяем начальную тему
 
         # Устанавливаем растяжение колонок
@@ -232,79 +232,103 @@ class Calculator(QWidget):
             layout.setColumnStretch(i, 1)
 
     def apply_theme(self):
+        """
+        Применение темы (темная или светлая).
+        """
         if self.is_dark_theme:
-            self.setStyleSheet("background-color: #2E2E2E; color: white;")
+            self.setStyleSheet("background-color: #2E2E2E; color: white;")  # Темная тема
             self.theme_button.setText("Светлая тема")
             self.theme_button.setStyleSheet("background-color: #4C4C4C; color: white;")
             self.help_button.setStyleSheet("background-color: #4C4C4C; color: white;")
             self.export_button.setStyleSheet("background-color: #4C4C4C; color: white;")
         else:
-            self.setStyleSheet("background-color: #FFFFFF; color: black;")
+            self.setStyleSheet("background-color: #FFFFFF; color: black;")  # Светлая тема
             self.theme_button.setText("Тёмная тема")
             self.theme_button.setStyleSheet("background-color: #CCCCCC; color: black;")
             self.help_button.setStyleSheet("background-color: #CCCCCC; color: black;")
             self.export_button.setStyleSheet("background-color: #CCCCCC; color: black;")
 
     def toggle_theme(self):
+        """
+        Переключение темы между темной и светлой.
+        """
         self.is_dark_theme = not self.is_dark_theme  # Переключаем тему
         self.apply_theme()  # Применяем новую тему
 
     def show_help(self):
+        """
+        Показать подсказки пользователю.
+        """
         QMessageBox.information(self, "Подсказки", "Используйте кнопки для выполнения операций. "
-                                                    "Кнопка 'C' очищает ввод, '=' вычисляет результат. "
+                                                    "Кнопка 'C' очищает ввод, "
+                                                    " '=' вычисляет результат. "
                                                     "Кнопка 'Экспорт' сохраняет историю вычислений.")
 
     def export_history(self):
+        """
+        Экспортировать историю вычислений в текстовый файл.
+        """
         with open("history.txt", "w") as file:
             for entry in self.history:
-                file.write(entry + "\n")
+                file.write(entry + "\n")  # Запись каждой записи в файл
         QMessageBox.information(self, "Экспорт", "История вычислений экспортирована в history.txt")
 
     def on_button_pressed(self, button):
+        """
+        Обработка нажатия кнопки.
+        """
         button.setStyleSheet("background-color: #3C3C3C; color: white; padding: 20px; border-radius: 5px;")
         self.player.setMedia(QMediaContent(QUrl.fromLocalFile("adding-calculator-button-press-multiple-01.mp3")))  # Укажите полный путь, если необходимо
         self.player.play()  # Воспроизводим звук
         
     def on_button_released(self, button):
+        """
+        Обработка отпускания кнопки.
+        """
         button.setStyleSheet("background-color: #4C4C4C; color: white; padding: 20px; border-radius: 5px;")
         self.player.setMedia(QMediaContent(QUrl.fromLocalFile("adding-calculator-button-press-multiple-01.mp3")))  # Укажите полный путь, если необходимо
         self.player.play()  # Воспроизводим звук
-        
 
     def on_button_click(self, char):
+        """
+        Обработка клика по кнопке.
+        """
         if char == 'C':
-            self.result.clear()
+            self.result.clear()  # Очистка поля ввода
         elif char == '=':
             try:
-                expression = self.result.text()
+                expression = self.result.text()  # Получение выражения из поля ввода
                 if expression.count('(') > expression.count(')'):
                     expression += ')'  # Добавляем закрывающую скобку только если есть открывающая
-                result = UltraAdvancedSafeCalculator.safe_eval(expression)
-                self.result.setText(result)
+                result = UltraAdvancedSafeCalculator.safe_eval(expression)  # Оценка выражения
+                self.result.setText(result)  # Установка результата в поле ввода
                 self.history.append(f"{expression} = {result}")  # Сохраняем в историю
                 self.history_area.append(f"{expression} = {result}")  # Отображаем в области истории
             except Exception:
-                self.result.setText("Ошибка")
+                self.result.setText("Ошибка")  # Сообщение об ошибке
         else:
             if char == '√':
                 self.result.setText(self.result.text() + 'sqrt(')  # Добавляем открывающую скобку
             else:
-                self.result.setText(self.result.text() + char)
+                self.result.setText(self.result.text() + char)  # Добавляем символ к выражению
 
 
 class SplashScreen(QWidget):
+    """
+    Класс для отображения заставки при запуске приложения.
+    """
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Загрузка")
-        self.setGeometry(100, 100, 600, 600)
-        self.setStyleSheet("background-color: #2E2E2E;")
+        self.setWindowTitle("Загрузка")  # Заголовок окна заставки
+        self.setGeometry(100, 100, 600, 600)  # Размеры окна
+        self.setStyleSheet("background-color: #2E2E2E;")  # Цвет фона заставки
 
-        layout = QVBoxLayout()
+        layout = QVBoxLayout()  # Создание вертикального макета
         layout.setAlignment(Qt.AlignCenter)  # Центрируем элементы по вертикали
 
         # Логотип
         self.logo = QLabel()
-        self.logo.setPixmap(QPixmap("logo.png").scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+        self.logo.setPixmap(QPixmap("logo.png").scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation))  # Установка логотипа
         self.logo.setAlignment(Qt.AlignCenter)
         self.logo.setStyleSheet("opacity: 0;")  # Начальное состояние невидимое
         layout.addWidget(self.logo)
@@ -317,18 +341,17 @@ class SplashScreen(QWidget):
 
         # Индикатор загрузки
         self.progress = QProgressBar()
-        self.progress.setRange(0, 100)
-        self.progress.setValue(0)
+        self.progress.setRange(0, 100)  # Установка диапазона индикатора
+        self.progress.setValue(0)  # Начальное значение
         layout.addWidget(self.progress)
 
-        # Кнопка с текстом
         # Кнопка с текстом
         self.footer_button = QPushButton('Создано Габеркорн Вадимом')
         self.footer_button.setStyleSheet("""
     QPushButton {
         background-color: #FFD700;  /* Золотистый цвет фона */
         color: black; 
-        font-size: 18px;  /* Увеличил размер шрифта */
+        font-size: 18px; ```python
         font-weight: bold; 
         border: 2px solid #FFA500;  /* Оранжевая граница */
         border-radius: 10px; 
@@ -343,12 +366,12 @@ class SplashScreen(QWidget):
         self.footer_button.setFixedWidth(350)  # Фиксированная ширина
         self.footer_button.setCursor(Qt.PointingHandCursor)
 
-# Добавляем кнопку в центр
+        # Добавляем кнопку в центр
         layout.addStretch()  # Добавляем растяжение перед кнопкой
         layout.addWidget(self.footer_button, alignment=Qt.AlignCenter)  # Центрируем кнопку
         layout.addStretch()  # Добавляем растяжение после кнопки
 
-        self.setLayout(layout)
+        self.setLayout(layout)  # Установка макета для виджета
 
         # Анимация для логотипа
         self.logo_animation = QPropertyAnimation(self.logo, b"opacity")
@@ -361,7 +384,7 @@ class SplashScreen(QWidget):
         self.timer.timeout.connect(self.update_progress)
         self.timer.start(100)  # Обновление каждые 100 мс
 
-        self.show()
+        self.show()  # Отображение заставки
         self.logo_animation.start()  # Запускаем анимацию логотипа
 
         # Инициализация анимации заголовка
@@ -372,8 +395,11 @@ class SplashScreen(QWidget):
         self.title_timer.start(200)  # Появление каждой буквы каждые 200 мс
 
     def update_title(self):
+        """
+        Обновление заголовка заставки.
+        """
         if self.title_index < len(self.title_text):
-            self.title.setText(self.title.text() + self.title_text[self.title_index])
+            self.title.setText(self.title.text() + self.title_text[self.title_index])  # Добавление буквы к заголовку
             self.title_index += 1
         else:
             self.title_timer.stop()  # Останавливаем таймер после завершения
@@ -381,26 +407,30 @@ class SplashScreen(QWidget):
         # Анимация заголовка
         if self.title_index == len(self.title_text):
             self.title_animation = QPropertyAnimation(self.title, b"opacity")
-            self.title_animation.setDuration(8000)  # Длительность анимации 2 секунды
+            self.title_animation.setDuration(8000)  # Длительность анимации 8 секунд
             self.title_animation.setStartValue(0)  # Начальная прозрачность
             self.title_animation.setEndValue(1)  # Конечная прозрачность
             self.title_animation.start()  # Запускаем анимацию заголовка
 
     def update_progress(self):
+        """
+        Обновление индикатора загрузки.
+        """
         value = self.progress.value() + 4  # Увеличиваем значение на 4
         if value > 100:
-            self.timer.stop()
-            self.close() # Закрываем заставку
-            self.open_calculator()
-        self.progress.setValue(value)
+            self.timer.stop()  # Останавливаем таймер
+            self.close()  # Закрываем заставку
+            self.open_calculator()  # Открываем калькулятор
+        self.progress.setValue(value)  # Установка нового значения индикатора
 
     def open_calculator(self):
-        self.calculator = Calculator()
-        self.calculator.show()
+        """
+        Открытие основного окна калькулятора.
+        """
+        self.calculator = Calculator()  # Создание экземпляра калькулятора
+        self.calculator.show()  # Отображение калькулятора
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    splash = SplashScreen()
-    sys.exit(app.exec_())
-
-    
+    app = QApplication(sys.argv)  # Создание экземпляра приложения
+    splash = SplashScreen()  # Создание и отображение заставки
+    sys.exit(app.exec_())  # Запуск основного цикла приложения
