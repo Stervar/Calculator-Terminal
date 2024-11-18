@@ -1,13 +1,14 @@
-import curses
-import math
-import re
-import ast
-import operator
-import cmath  # Для комплексных чисел
-
-
+import curses  # Импортируем библиотеку curses для работы с консольным интерфейсом
+import math  # Импортируем библиотеку math для математических операций
+import re  # Импортируем библиотеку re для работы с регулярными выражениями
+import ast  # Импортируем библиотеку для работы с абстрактным синтаксическим деревом (AST)
+import operator  # Импортируем библиотеку для работы с операциями
+import cmath  # Импортируем библиотеку для работы с комплексными числами
 
 class UltraAdvancedSafeCalculator:
+    """
+    Класс для безопасного вычисления математических выражений.
+    """
     SAFE_FUNCTIONS = {
         # Основные математические функции
         'abs': abs,
@@ -28,9 +29,9 @@ class UltraAdvancedSafeCalculator:
         'tanh': math.tanh,
         
         # Расширенные тригонометрические функции
-        'sec': lambda x: 1 / math.cos(x),
-        'csc': lambda x: 1 / math.sin(x),
-        'cot': lambda x: 1 / math.tan(x),
+        'sec': lambda x: 1 / math.cos(x),  # Секанс
+        'csc': lambda x: 1 / math.sin(x),  # Котангенс
+        'cot': lambda x: 1 / math.tan(x),  # Косеканс
         
         # Гиперболические обратные функции
         'asinh': math.asinh,
@@ -47,7 +48,7 @@ class UltraAdvancedSafeCalculator:
         # Корни и степени
         'sqrt': math.sqrt,
         'pow': pow,
-        'cbrt': lambda x: math.copysign(math.pow(abs(x), 1/3), x),
+        'cbrt': lambda x: math.copysign(math.pow(abs(x), 1/3), x),  # Кубический корень
         
         # Округление
         'ceil': math.ceil,
@@ -59,14 +60,14 @@ class UltraAdvancedSafeCalculator:
 
         # Комплексные числа
         'complex': complex,
-        'real': lambda x: complex(x).real,
-        'imag': lambda x: complex(x).imag,
+        'real': lambda x: complex(x).real,  # Извлечение действительной части
+        'imag': lambda x: complex(x).imag,  # Извлечение мнимой части
         
         # Константы
         'pi': math.pi,
         'e': math.e,
         'tau': math.tau,
-        'inf': float('inf'),
+        'inf': float('inf'),  # Бесконечность
         
         # Статистические функции
         'degrees': math.degrees,
@@ -74,90 +75,137 @@ class UltraAdvancedSafeCalculator:
     }
 
     SAFE_OPERATORS = {
-        ast.Add: operator.add,
-        ast.Sub: operator.sub,
-        ast.Mult: operator.mul,
-        ast.Div: operator.truediv,
-        ast.Pow: operator.pow,
-        ast.USub: operator.neg,
-        ast.UAdd: operator.pos
+        ast.Add: operator.add,  # Оператор сложения
+        ast.Sub: operator.sub,  # Оператор вычитания
+        ast.Mult: operator.mul,  # Оператор умножения
+        ast.Div: operator.truediv,  # Оператор деления
+        ast.Pow: operator.pow,  # Оператор возведения в степень
+        ast.USub: operator.neg,  # Унарный оператор отрицания
+        ast.UAdd: operator.pos  # Унарный оператор положительного значения
     }
 
     @classmethod
     def safe_eval(cls, expression):
+        """
+        Безопасная оценка математического выражения.
+
+        Args:
+            expression: Строка, представляющая математическое выражение.
+
+        Returns:
+            Результат вычисления или сообщение об ошибке.
+        """
         try:
             # Расширенная предобработка
-            expression = cls.preprocess_expression(expression)
-        
+            expression = cls.preprocess_expression(expression)  # Обработка выражения перед парсингом
+            
             # Проверка на допустимые символы
             if not re.match(r'^[0-9+\-*/().,a-zA-Z\s]+$', expression):
-                return "Недопустимые символы в выражении"
-        
+                return "Недопустимые символы в выражении"  # Сообщение об ошибке для недопустимых символов
+            
             # Парсинг и вычисление
-            parsed = ast.parse(expression, mode='eval')
-            result = cls.eval_node(parsed.body)
-        
-            # Обработка результата
-            return cls.format_result(result)
-    
+            parsed = ast.parse(expression, mode='eval')  # Парсинг выражения в AST
+            result = cls.eval_node(parsed.body)  # Оценка корневого узла AST
+            
+            # Обработка результата ```python
+            return cls.format_result(result)  # Форматирование результата перед возвратом
+            
         except SyntaxError:
-            return "Синтаксическая ошибка"
+            return "Синтаксическая ошибка"  # Сообщение об ошибке для синтаксических ошибок
         except Exception as e:
-            return f"Ошибка: {cls.handle_error(e)}"
+            return f"Ошибка: {cls.handle_error(e)}"  # Возврат сообщения об ошибке
 
     @classmethod
     def preprocess_expression(cls, expression):
-        # Расширенная предобработка
-        expression = expression.replace('^', '**')
-        expression = expression.replace('√', 'sqrt')
-        expression = expression.replace('×', '*')
-        expression = expression.replace('÷', '/')
+        """
+        Предварительная обработка математического выражения.
+
+        Args:
+            expression: Строка, представляющая математическое выражение.
+
+        Returns:
+            Обработанное выражение.
+        """
+        # Замена операторов
+        expression = expression.replace('^', '**')  # Замена ^ на **
+        expression = expression.replace('√', 'sqrt')  # Замена √ на sqrt
+        expression = expression.replace('×', '*')  # Замена × на *
+        expression = expression.replace('÷', '/')  # Замена ÷ на /
     
-        # Улучшенное неявное умножение
-        expression = re.sub(r'(\d+)([a-zA-Z(])', r'\1*\2', expression)
-        expression = re.sub(r'([a-zA-Z)])(\d+)', r'\1*\2', expression)
+        # Добавление неявного умножения
+        expression = re.sub(r'(\d+)([a-zA-Z(])', r'\1*\2', expression)  # Добавление * между числом и скобкой
+        expression = re.sub(r'([a-zA-Z)])(\d+)', r'\1*\2', expression)  # Добавление * между скобкой и числом
     
         # Замена математических функций
         replacements = {
-            'lg': 'log10',
-            'ln': 'log',
-            '∛': 'cbrt'
-    }
+            'lg': 'log10',  # Замена lg на log10
+            'ln': 'log',  # Замена ln на log
+            '∛': 'cbrt'  # Замена ∛ на cbrt
+        }
     
         for old, new in replacements.items():
-            expression = expression.replace(old, new)
+            expression = expression.replace(old, new)  # Замена функций в выражении
     
-        return expression
+        return expression  # Возврат обработанного выражения
 
     @classmethod
     def format_result(cls, result):
+        """
+        Форматирование результата вычислений.
+
+        Args:
+            result: Результат вычислений.
+
+        Returns:
+            Строка, представляющая отформатированный результат.
+        """
         # Интеллектуальное форматирование результата
-        if isinstance(result, float):
+        if isinstance(result, float):  # Если результат является числом с плавающей запятой
             # Округление больших чисел
             if abs(result) > 1e10 or abs(result) < 1e-10:
-                return f"{result:.5e}"
+                return f"{result:.5e}"  # Научный формат
             # Округление малых чисел
-            return f"{result:.10f}".rstrip('0').rstrip('.')
+            return f"{result:.10f}".rstrip('0').rstrip('.')  # Удаление лишних нулей
         
-        return str(result)
+        return str(result)  # Возврат результата как строки
 
     @classmethod
     def handle_error(cls, error):
+        """
+        Обработка ошибок.
+
+        Args:
+            error: Исключение, которое нужно обработать.
+
+        Returns:
+            Строка с сообщением об ошибке.
+        """
         # Расширенная обработка ошибок
         error_map = {
-            ZeroDivisionError: "Деление на ноль",
-            OverflowError: "Слишком большое число",
-            ValueError: "Недопустимое математическое действие",
-            TypeError: "Неверный тип данных"
+            ZeroDivisionError: "Деление на ноль",  # Сообщение для деления на ноль
+            OverflowError: "Слишком большое число",  # Сообщение для переполнения
+            ValueError: "Недопустимое математическое действие",  # Сообщение для недопустимого действия
+            TypeError: "Неверный тип данных"  # Сообщение для неверного типа данных
         }
         
         for err_type, message in error_map.items():
-            if isinstance(error, err_type):
-                return message
+            if isinstance(error, err_type):  # Проверка типа ошибки
+                return message  # Возврат соответствующего сообщения
         
-        return str(error)
+        return str(error)  # Возврат общего сообщения об ошибке
 
 def draw_calculator_frame(framework, current_input, result):
+    """
+    Отрисовка рамки калькулятора.
+
+    Args:
+        framework: Объект curses, предоставляющий доступ к консольному интерфейсу.
+        current_input: Текущее введенное пользователем выражение.
+        result: Результат вычислений.
+
+    Returns:
+        None.
+    """
     try:
         # Получаем размеры экрана
         height, width = framework.getmaxyx()
@@ -258,7 +306,7 @@ def draw_calculator_frame(framework, current_input, result):
 def calculator(special_keys):
     # Настройка цветов
     curses.start_color()
-    curses.curs_set(0)  # Скрываем курсор
+    curses.curs_set(0)  # Скрываем курсора
     
     # Включаем возможность чтения специальных клавиш
     special_keys.keypad(True)
@@ -317,6 +365,7 @@ def calculator(special_keys):
             current_input += 'tan('
         elif key == ord('g'):  # log10
             current_input += 'log10('
+
 def remove_last_number_or_operator(expression):
     """Удаляет последнее число или оператор"""
     # Разбиваем выражение на части
