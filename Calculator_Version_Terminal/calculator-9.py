@@ -160,13 +160,13 @@ class UltraAdvancedSafeCalculator:
 def draw_calculator_frame(framework, current_input, result):
     try:
         # Получаем размеры экрана
-        height, width = stdscr.getmaxyx()
+        height, width = framework.getmaxyx()
         
         # Проверяем минимальный размер окна
         if height < 30 or width < 150:  # Увеличил минимальную ширину
-            stdscr.clear()
-            stdscr.addstr(height//2, 0, "Увеличьте размер окна терминала!")
-            stdscr.refresh()
+            framework.clear()
+            framework.addstr(height//2, 0, "Увеличьте размер окна терминала!")
+            framework.refresh()
             return
         
         # Рассчитываем позицию для центрирования
