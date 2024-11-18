@@ -251,9 +251,9 @@ def draw_calculator_frame(stdscr, current_input, result):
         stdscr.refresh()
     
     except Exception as e:
-        stdscr.clear()
-        stdscr.addstr(0, 0, f"Произошла ошибка: {str(e)}")
-        stdscr.refresh()
+        framework.clear()
+        framework.addstr(0, 0, f"Произошла ошибка: {str(e)}")
+        framework.refresh()
 
 def calculator(special_keys):
     # Настройка цветов
