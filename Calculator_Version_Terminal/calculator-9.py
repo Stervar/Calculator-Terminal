@@ -255,13 +255,13 @@ def draw_calculator_frame(stdscr, current_input, result):
         stdscr.addstr(0, 0, f"Произошла ошибка: {str(e)}")
         stdscr.refresh()
 
-def calculator(stdscr):
+def calculator(framework):
     # Настройка цветов
     curses.start_color()
     curses.curs_set(0)  # Скрываем курсор
     
     # Включаем возможность чтения специальных клавиш
-    stdscr.keypad(True)
+    framework.keypad(True)
     
     # Инициализация переменных
     current_input = ""
@@ -269,7 +269,7 @@ def calculator(stdscr):
     
     while True:
         # Отрисовка калькулятора
-        draw_calculator_frame(stdscr, current_input, result)
+        draw_calculator_frame(framework, current_input, result)
         
         # Получение нажатия клавиши
         key = stdscr.getch()
