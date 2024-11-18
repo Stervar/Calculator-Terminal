@@ -157,7 +157,7 @@ class UltraAdvancedSafeCalculator:
         
         return str(error)
 
-def draw_calculator_frame(stdscr, current_input, result):
+def draw_calculator_frame(framework, current_input, result):
     try:
         # Получаем размеры экрана
         height, width = stdscr.getmaxyx()
@@ -209,11 +209,11 @@ def draw_calculator_frame(stdscr, current_input, result):
 
         # Отрисовка левых инструкций
         for i, line in enumerate(instructions_left):
-            stdscr.addstr(start_y + i, start_x - 45, line)
+            framework.addstr(start_y + i, start_x - 45, line)
 
         # Отрисовка правых инструкций
         for i, line in enumerate(instructions_right):
-            stdscr.addstr(start_y + i, start_x + calc_width + 1, line)
+            framework.addstr(start_y + i, start_x + calc_width + 1, line)
 
         # Основная рамка калькулятора 
         frame = [
@@ -239,7 +239,7 @@ def draw_calculator_frame(stdscr, current_input, result):
 
         # Отрисовка рамки
         for idx, line in enumerate(frame):
-            stdscr.addstr(start_y + idx, start_x, line)
+            framework.addstr(start_y + idx, start_x, line)
 
         # Отображение ввода
         framework.addstr(start_y + 3, start_x + 7, current_input)
