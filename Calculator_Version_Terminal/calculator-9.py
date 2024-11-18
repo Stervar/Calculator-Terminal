@@ -272,7 +272,7 @@ def calculator(framework):
         draw_calculator_frame(framework, current_input, result)
         
         # Получение нажатия клавиши
-        key = stdscr.getch()
+        key = framework.getch()
         
         # Обработка нажатий
         if key == ord('q'):
