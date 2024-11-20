@@ -104,7 +104,6 @@ class UltraAdvancedSafeCalculator:
             result = cls.eval_node(parsed.body)  # Оценка корневого узла AST
             return cls.format_result(result)  # Форматирование результата
         except Exception as e:
-            return f"Ошибка: {str(e)}"  # Возв ```python
             return f"Ошибка: {str(e)}"  # Возврат сообщения об ошибке
 
     @classmethod
